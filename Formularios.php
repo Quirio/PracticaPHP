@@ -4,15 +4,16 @@
 	define("OUT",1);
 	define("PRINCIPAL",2);
 	
-	abstract class Formulario
-	{
+	abstract class Formulario{
+		protected $con;
+		protected $TextoHTML;
 		abstract public function ejecutar_BDD();
 		abstract public function mostrar();
 	}
 	
 	class Formulario_in extends Formulario{
-		private $TextoHTML = " ";
-		public function Formulario_in (){
+		public function Formulario_in ($con){
+			$this -> con = $con;
 			$this -> TextoHTML .= <<<HTML
 
 			<form action="{$_SERVER['PHP_SELF']}" method="post">
@@ -38,22 +39,31 @@ HTML;
 		}
 		
 		public function ejecutar_BDD(){
-			$sql = "INSERT INTO User VALUES('$Nombre','$Apellidos','$Correo','$Telefono')";
-			return mysql_query($sql);
+			echo "nombre: ". $Nombre;
+			$sql = "INSERT INTO Usuarios (Nombre,Apellido,Correo,Telefono) VALUES('$Nombre','$Apellidos','$Correo','$Telefono')";
+			return mysql_query($sql,$this->con);
 		}
 	}
 	
-
-	
+	/*class Principal extends Formulario{
+		private $SQL;
+		public function Principal(){
+			$this -> SQL = "";
+			$this -> TextoHTML .= <<<HTML
+			
+HTML;
+		}
+	}*/
+		
 	class Factoria {
-		public function getformulario($tipo) {
+		public function getformulario($tipo,$con) {
 			switch (tipo) {
 				case IN:
-					return new Formulario_in();
+					return new Formulario_in($con);
 				case OUT:
-					return "aun no";//return new Circulo(lado);
+					return "aun no";
 				case PRINCIPAL:
-					return "aun no";//return new Circulo(lado);
+					return "aun no";
 			}  
 			return null;
 		}

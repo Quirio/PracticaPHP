@@ -6,7 +6,7 @@
 	<?php
 		require 'Coneccion.php';
 		require 'Formularios.php';
-		$Conect = new Coneccion('localhost','root','sar159753','cv');
+		$Conect = new Coneccion('localhost:8081','root','sar159753','usuarios');
 	?>
     
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -14,9 +14,15 @@
 	
   <body>
 	<?php
+	/*
 		$Factoria = new Factoria();
-		$Formulario_actual = $Factoria -> getformulario($IN);
+		$Formulario_actual = $Factoria -> getformulario($IN,$Conect->con);
 		echo $Formulario_actual -> mostrar();
+		if ( $_POST ){
+			echo "pollo";
+			$Formulario_actual -> ejecutar_BDD();
+		}
+		*/
 	?>
   </body>
 </html>
