@@ -41,7 +41,10 @@ HTML;
 			$Correo = $_POST['correo'];
 			$Telefono = $_POST['telefono'];
 			$sql = "INSERT INTO Usuarios (Nombre,Apellido,Correo,Telefono) VALUES('$Nombre','$Apellidos','$Correo','$Telefono')";
-			mysql_query($sql);
+			if(!mysql_query($sql))
+				echo "<h4 class=\"msg_error\">Error a la hora de introducir el usuario en la base de datos.</h4>";
+			else
+				echo "<h4 class=\"msg_exito\">Usuario creado correctamente.</h4>";
 		}
 	}
 	
@@ -67,11 +70,11 @@ HTML;
 				$Nombre = $_POST['nombre'];
 				$sql = "SELECT `Nombre`, `Apellido`, `Correo`, `Telefono` FROM `usuarios` WHERE Nombre= '$Nombre'";
 				$resultado = mysql_query($sql);
-				 $this -> Resultados .= "<section id=\"Resultados\">";
-				 if ( $resultado !== false && mysql_num_rows($resultado) > 0 ) {
+				 $this -> Resultados .= "<section id=\"Resultados\">". $_POST['nombre'];
+				 if ( $resultado != false AND mysql_num_rows($resultado) > 0 ) {
 					while($fila = mysql_fetch_assoc ($resultado)){ 
 						 $this -> Resultados .= <<< HTML
-						<section class = "Fila">
+						 <section class = "Fila">
 							<h1>Información del Usuario</h1>
 							<h2> Nombre </h2>
 							<p><strong> {$fila['Nombre']}</strong></p>
@@ -89,9 +92,9 @@ HTML;
 	 
 				}
 				
-				else if (!$_POST['nombre'])
-					$this -> Resultados = "<h1>No existe ese usuario en la base de datos.<h1>";
-				
+				elseif(!$_GET)
+					$this -> Resultados = "<h4 class=\"msg_error\">No existe ese usuario en la base de datos.<h4>";
+			$_POST = array();
 			return $this -> Resultados;
 		}
 	}
@@ -100,7 +103,7 @@ HTML;
 	class InforAlumno extends Formulario{
 		private $SQL;
 		public function InforAlumno(){
-			$this -> SQL = "SELECT `Nombre`, `Apellido`, `Correo`, `Telefono` FROM `usuarios` WHERE id = -1 ";
+			$this -> SQL = "SELECT `Nombre`, `Apellido`, `Correo`, `Telefono` FROM `usuarios` WHERE Nombre='Alejandro' ";
 			$resultado = mysql_fetch_assoc(mysql_query($this -> SQL));
 			$this -> TextoHTML .= <<<HTML
 			 <section class = "Fila">

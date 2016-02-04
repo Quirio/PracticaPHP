@@ -2,6 +2,11 @@ body{
 
 }
 
+body h4{
+	position: absolute;
+	left: 44%;
+}
+
 section{	
 	text-align: center;
 	color:#FFFFFF;
@@ -13,6 +18,18 @@ section{
 	top:49%;
 	background-color:#f6f6ee;
 	width: 100%;
+}
+
+.msg_error{
+		border: 2px solid red;
+		background-color: white;
+		color: red;
+}
+
+.msg_exito{
+		border: 2px solid #666633;
+		background-color: #f6f6ee;
+		color: black;
 }
 
 .Formulario{
