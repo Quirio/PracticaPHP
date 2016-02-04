@@ -4,10 +4,6 @@
 	define("ALUM",1);
 	
 	abstract class Formulario{
-<<<<<<< HEAD
-=======
-		protected $con;
->>>>>>> origin/master
 		protected $TextoHTML;
 		abstract public function ejecutar_BDD();
 		public function mostrar(){
@@ -16,12 +12,7 @@
 	}
 	
 	class Formulario_in extends Formulario{
-<<<<<<< HEAD
 		public function Formulario_in (){
-=======
-		public function Formulario_in ($con){
-			$this -> con = $con;
->>>>>>> origin/master
 			$this -> TextoHTML .= <<<HTML
 			<h1> Nuevo Usuario del Servicio </h1>
 			<form action="{$_SERVER['PHP_SELF']}" method="post">
@@ -67,23 +58,7 @@ HTML;
 						
 		}
 		
-		/*public function mostrar(){
-			if($this -> Resultados != ""){
-			$this -> TextoHTML = <<< HTML
-			{$this -> Resultados}
-			<a href="{$_SERVER['PHP_SELF']}?formulario_tipo=0">Nueva Usuario</a>
-			<a href="{$_SERVER['PHP_SELF']}">Nueva Consulta</a>
-			<a href="{$_SERVER['PHP_SELF']}?formulario_tipo=1">Obtener Información Alumno</a>	
-HTML;
-			return $this -> TextoHTML;
-			}
-			
-			else
-				return $this -> TextoHTML;
-		}*/
-		
 		public function ejecutar_BDD(){
-<<<<<<< HEAD
 				$Nombre = $_POST['nombre'];
 				$sql = "SELECT `Nombre`, `Apellido`, `Correo`, `Telefono` FROM `usuarios` WHERE Nombre= '$Nombre'";
 				$resultado = mysql_query($sql);
@@ -147,33 +122,7 @@ HTML;
 					return new InforAlumno();					
 				case IN:
 					return new Formulario_in();					
-=======
-			echo "nombre: ". $Nombre;
-			$sql = "INSERT INTO Usuarios (Nombre,Apellido,Correo,Telefono) VALUES('$Nombre','$Apellidos','$Correo','$Telefono')";
-			return mysql_query($sql,$this->con);
-		}
-	}
-	
-	/*class Principal extends Formulario{
-		private $SQL;
-		public function Principal(){
-			$this -> SQL = "";
-			$this -> TextoHTML .= <<<HTML
-			
-HTML;
-		}
-	}*/
-		
-	class Factoria {
-		public function getformulario($tipo,$con) {
-			switch (tipo) {
-				case IN:
-					return new Formulario_in($con);
-				case OUT:
-					return "aun no";
-				case PRINCIPAL:
-					return "aun no";
->>>>>>> origin/master
+
 			}  
 		}
 	}
