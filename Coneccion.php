@@ -4,15 +4,21 @@
 		var $username;
 		var $password;
 		var $database;
+		Public $con;
 		
-		function Coneccion($server,$username, $password,$database){
-			$this -> $server = $server;
-			$this -> $username = $username;
-			$this -> $password = $password;
-			$this -> $database = $database;
+		function Coneccion($server,$username,$database){
+			$this -> server = $server;
+			$this -> username = $username;
+			//$this -> password = $password;
+			$this -> database = $database;
 				
-			$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-			mysql_select_db($database, $con);
+			$this -> con = mysql_connect($server, $username) or die ("Could not connect: " . mysql_error());
+			
+			mysql_select_db($database);
+		}
+		
+		function Close(){
+			mysql_close($this -> con);
 		}
 	}
 ?>
