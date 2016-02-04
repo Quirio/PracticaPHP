@@ -14,21 +14,24 @@
 	class Formulario_in extends Formulario{
 		public function Formulario_in (){
 			$this -> TextoHTML .= <<<HTML
-			<h1> Nuevo Usuario del Servicio </h1>
-			<form action="{$_SERVER['PHP_SELF']}?formulario_tipo=0" method="post">
-    			<label>Nombre:</label><br />
-				<input name="nombre" id="Nombre" type="text" required/><br />
-				<label>Apellidos:</label><br />
-				<input name="apellidos" id="Apellidos" type="text" required/><br />
-				<label>Teléfono:</label><br />
-				<input name="telefono" id="Telefono" type="tel" required/><br />
-				<label>Correo</label><br />
-				<input name="correo" id="Correo" type="email" required/><br />
-				<input type="submit" value="Crear" />
-			</form>
+			<section class="Formulario">
+				<h1> Nuevo Usuario del Servicio </h1>
+				<form action="{$_SERVER['PHP_SELF']}?formulario_tipo=0" method="post">
+					<label>Nombre:</label><br />
+					<input name="nombre" id="Nombre" type="text" required/><br />
+					<label>Apellidos:</label><br />
+					<input name="apellidos" id="Apellidos" type="text" required/><br />
+					<label>Teléfono:</label><br />
+					<input name="telefono" id="Telefono" type="tel" required/><br />
+					<label>Correo</label><br />
+					<input name="correo" id="Correo" type="email" required/><br />
+					<input class="Boton" type="submit" value="Crear" />
+				</form>
+					<a class="Boton" href="Info.php">Atrás</a>
+			</section>
     
 			<br />
-			<a href="Info.php">Atrás</a>"
+
 HTML;
 		}
 		
@@ -46,14 +49,16 @@ HTML;
 		public $Resultados = "";
 		public function Formulario_out(){
 			$this -> TextoHTML = <<<HTML
-			<h1>Consulta de datos de usuarios</h1>
-			<h2>Introduzca el nombre del usuario</h2>
-			<form action="{$_SERVER['PHP_SELF']}" method="post">
-				<input name="nombre" id="Nombre" type="text" required/><br />
-				<input type="submit" value="consultar" />
-			</form>
-			<a href="{$_SERVER['PHP_SELF']}?formulario_tipo=0">Nueva Usuario</a>
-			<a href="{$_SERVER['PHP_SELF']}?formulario_tipo=1">Obtener Información Alumno</a>
+			<section class="Formulario">
+				<h1>Consulta de datos de usuarios</h1>
+				<h2>Introduzca el nombre del usuario</h2>
+				<form action="{$_SERVER['PHP_SELF']}" method="post">
+					<input name="nombre" id="Nombre" type="text" required/><br />
+					<input class="Boton" type="submit" value="consultar" />
+				</form>
+				<a class="Boton" href="{$_SERVER['PHP_SELF']}?formulario_tipo=0">Nueva Usuario</a>
+				<a class="Boton" href="{$_SERVER['PHP_SELF']}?formulario_tipo=1">Obtener Información Alumno</a>
+			</section>
 HTML;
 						
 		}
@@ -62,12 +67,12 @@ HTML;
 				$Nombre = $_POST['nombre'];
 				$sql = "SELECT `Nombre`, `Apellido`, `Correo`, `Telefono` FROM `usuarios` WHERE Nombre= '$Nombre'";
 				$resultado = mysql_query($sql);
-				
+				 $this -> Resultados .= "<section id=\"Resultados\">";
 				 if ( $resultado !== false && mysql_num_rows($resultado) > 0 ) {
-					 while($fila = mysql_fetch_assoc ($resultado )){
+					while($fila = mysql_fetch_assoc ($resultado)){ 
 						 $this -> Resultados .= <<< HTML
-						 <div class = "Fila">
-							<h1>Información del Alumno</h1>
+						<section class = "Fila">
+							<h1>Información del Usuario</h1>
 							<h2> Nombre </h2>
 							<p><strong> {$fila['Nombre']}</strong></p>
 							<h2> Apellidos </h2>
@@ -76,10 +81,11 @@ HTML;
 							<p><strong> {$fila['Correo']}</strong></p>
 							<h2> Teléfono </h2>
 							<p><strong> {$fila['Telefono']}</strong></p>
-						</div>
+						</section>
 						
 HTML;
 					 }
+					  $this -> Resultados .= "</section>";
 	 
 				}
 				
@@ -97,6 +103,7 @@ HTML;
 			$this -> SQL = "SELECT `Nombre`, `Apellido`, `Correo`, `Telefono` FROM `usuarios` WHERE id = -1 ";
 			$resultado = mysql_fetch_assoc(mysql_query($this -> SQL));
 			$this -> TextoHTML .= <<<HTML
+			 <section class = "Fila">
 				<h1>Información del Alumno</h1>
 				<h2> Nombre </h2>
 				<p><strong> {$resultado['Nombre']}</strong></p>
@@ -106,7 +113,8 @@ HTML;
 				<p><strong> {$resultado['Correo']}</strong></p>
 				<h2> Teléfono </h2>
 				<p><strong> {$resultado['Telefono']}</strong></p>
-				<a href="{$_SERVER['PHP_SELF']}">Atrás</a>
+				<a class="Boton" href="{$_SERVER['PHP_SELF']}">Atrás</a>
+			 </section>
 HTML;
 		}
 		

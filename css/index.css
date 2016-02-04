@@ -1,0 +1,40 @@
+body{
+
+}
+
+section{	
+	text-align: center;
+	color:#FFFFFF;
+	background-color:#666633;
+}
+
+#Resultados{
+	position:absolute;
+	top:49%;
+	background-color:#f6f6ee;
+	width: 100%;
+}
+
+.Formulario{
+	width: 100%;
+}
+
+.Fila{
+	position:relative;
+	background-color:#cccc99;
+	width: 33%;
+	display:inline-block;
+	border: 2px solid #666633;
+}
+
+ .Boton{
+	background-color: white;
+	color: black;
+	border: 2px solid #cccc99;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-left: 20px;
+}
