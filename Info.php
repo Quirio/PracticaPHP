@@ -13,8 +13,10 @@
 		$Formulario_actual = $Factoria -> getformulario();
 		echo $Formulario_actual -> mostrar();
 		if ( $_POST ){
+			echo "entro";
 			echo $Formulario_actual -> ejecutar_BDD();
 		}
+		$Conect -> Close();
 	?>
   </body>
   

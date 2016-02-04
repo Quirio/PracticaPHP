@@ -14,7 +14,10 @@
 				
 			$this -> con = mysql_connect($server, $username) or die ("Could not connect: " . mysql_error());
 			
-			mysql_select_db($database);
+			mysql_select_db($database,$this->con);
+			echo $this -> server;
+			echo $this -> username = $username;
+			echo $this -> database = $database;
 		}
 		
 		function Close(){

@@ -15,7 +15,7 @@
 		public function Formulario_in (){
 			$this -> TextoHTML .= <<<HTML
 			<h1> Nuevo Usuario del Servicio </h1>
-			<form action="{$_SERVER['PHP_SELF']}" method="post">
+			<form action="{$_SERVER['PHP_SELF']}?formulario_tipo=0" method="post">
     			<label>Nombre:</label><br />
 				<input name="nombre" id="Nombre" type="text" required/><br />
 				<label>Apellidos:</label><br />
@@ -37,7 +37,7 @@ HTML;
 			$Apellidos = $_POST['apellidos'];
 			$Correo = $_POST['correo'];
 			$Telefono = $_POST['telefono'];
-			$sql = "INSERT INTO `usuarios`(`Nombre`, `Apellido`, `Correo`, `Telefono`) VALUES('$Nombre','$Apellidos','$Correo','$Telefono')";
+			$sql = "INSERT INTO Usuarios (Nombre,Apellido,Correo,Telefono) VALUES('$Nombre','$Apellidos','$Correo','$Telefono')";
 			mysql_query($sql);
 		}
 	}
@@ -65,7 +65,7 @@ HTML;
 				
 				 if ( $resultado !== false && mysql_num_rows($resultado) > 0 ) {
 					 while($fila = mysql_fetch_assoc ($resultado )){
-						 $this -> Resultados = <<< HTML
+						 $this -> Resultados .= <<< HTML
 						 <div class = "Fila">
 							<h1>Información del Alumno</h1>
 							<h2> Nombre </h2>
@@ -83,7 +83,7 @@ HTML;
 	 
 				}
 				
-				else if ($_POST)
+				else if (!$_POST['nombre'])
 					$this -> Resultados = "<h1>No existe ese usuario en la base de datos.<h1>";
 				
 			return $this -> Resultados;
